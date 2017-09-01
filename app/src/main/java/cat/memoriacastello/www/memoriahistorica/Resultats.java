@@ -30,7 +30,7 @@ public class Resultats extends AppCompatActivity {
         super.onStart();
 
         int suma = MainActivity.benContestades.size();
-        for (DadesPregunta pregunta: MainActivity.partida)
+        for (DadesPregunta pregunta: MainActivity.preguntesPartida)
             if (pregunta != null && pregunta.getEstat()>0) suma += 1;
 
         if (MainActivity.contestades == MainActivity.MAX_PREG_PER_PARTIDA && MainActivity.horaFi == 0)
@@ -52,7 +52,7 @@ public class Resultats extends AppCompatActivity {
         /*
         S'ha de reiniciar:
         - l'hora d'inici (camp horaInici del MainActivity).
-        - el nombre de preguntes contestades (camp contestades del MainActivity).
+        - el nombre de preguntesJoc contestades (camp contestades del MainActivity).
 
         S'ha de modificar la variable reset que indica si estem reiniciat.
          */
@@ -97,10 +97,10 @@ public class Resultats extends AppCompatActivity {
     public void reinicia(View v){
         MainActivity.horaInici = java.util.Calendar.getInstance().getTimeInMillis();
         MainActivity.contestades = 0;
-        for (int i =0; i < MainActivity.partida.length; i++) {
-            if (MainActivity.partida[i] != null)
-                MainActivity.partida[i].neteja();
-            MainActivity.partida[i] = null;
+        for (int i = 0; i < MainActivity.preguntesPartida.length; i++) {
+            if (MainActivity.preguntesPartida[i] != null)
+                MainActivity.preguntesPartida[i].neteja();
+            MainActivity.preguntesPartida[i] = null;
         }
         MainActivity.reset = true;
         f.esborraFitxer("historial");

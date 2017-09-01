@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -67,7 +66,7 @@ public class PaginaPrincipal extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        //Omple el vector de preguntes de forma aleatòria quan comença el joc
+        //Omple el vector de preguntesPartida de forma aleatòria quan comença el joc
         // i en les successives vegades que es prem el botó "REINICIA EL JOC".
         if (MainActivity.reset == true) {
             omplePartida();
@@ -81,7 +80,7 @@ public class PaginaPrincipal extends AppCompatActivity {
         };
 
         int suma = 0, i = 0;
-        for(DadesPregunta pregunta : MainActivity.partida) {
+        for(DadesPregunta pregunta : MainActivity.preguntesPartida) {
             if (pregunta == null) {
                 botons[i++].setEnabled(false);
                 continue;
@@ -110,17 +109,21 @@ public class PaginaPrincipal extends AppCompatActivity {
 
     private void omplePartida(){
         /*
-        Este procediment ens permet omplir el vector de les preguntes que eixen
-        al joc en curs. En total tenim 42 preguntes, però al joc només n'eixen
+        Este procediment ens permet omplir el vector de les preguntesJoc que eixen
+        al joc en curs. En total tenim 42 preguntesJoc, però al joc només n'eixen
         20, així cada vegada l'usuari té la sensació de jugar a un nou joc, les
-        preguntes no seran les mateixes i l'ordre en que apareixen serà diferent.
+        preguntesJoc no seran les mateixes i l'ordre en que apareixen serà diferent.
          */
 
-        for (int i =0; i < MainActivity.partida.length; i++) {
-            if (MainActivity.partida[i] != null) MainActivity.partida[i].setEstat(0);
-            MainActivity.partida[i] = null;
+        //Necessitem netejar el vector de MainActivity.preguntesPartida
+        for (int i = 0; i < MainActivity.preguntesPartida.length; i++) {
+            if (MainActivity.preguntesPartida[i] != null)
+                MainActivity.preguntesPartida[i].neteja();
+            MainActivity.preguntesPartida[i] = null;
         }
 
+        //Llegim historial per saber quines s'han contestat correctament
+        //i no repetir-les.
         String v[] = f.lligFitxer("historial");
         for (String linea : v){
             if (linea.startsWith("[id:")){
@@ -137,21 +140,25 @@ public class PaginaPrincipal extends AppCompatActivity {
             }
         }
 
-
+        /*
+        Omplim el vector de noves preguntes.
+         - alea és un nombre aleatori del 0 al 41 per a obtindre una pregunta de totes les del joc.
+         - idx és el nombre de preguntes que s'han anat afegint, però també l'índex del vector de
+               preguntesPartida, raó per la que começa per 0.
+         - forat és el nombre de botons de preguntes que quedaran bloquejades quan el vector no es
+               puga completar.
+         */
         Random random = new Random();
         Integer alea;
-        int tots = 0;
+        int idx = 0;
         ArrayList<Integer> llista = new ArrayList<>();
         int forat = MainActivity.MAX_PREGUNTES - MainActivity.benContestades.size();
-        while (tots < MainActivity.MAX_PREG_PER_PARTIDA && tots < forat) {
+        while (idx < MainActivity.MAX_PREG_PER_PARTIDA && idx < forat) {
             alea = random.nextInt(MainActivity.MAX_PREGUNTES);
             if (!llista.contains(alea) && !MainActivity.benContestades.contains(alea)) {
                 llista.add(alea);
-                DadesPregunta p = new DadesPregunta(MainActivity.preguntes[alea]);
-                MainActivity.partida[tots] = p;
-                if (MainActivity.partida[tots] != null && MainActivity.partida[tots].getEstat()==-1)
-                    MainActivity.partida[tots].setEstat(0);
-                tots++;
+                MainActivity.preguntesPartida[idx++] = new DadesPregunta(MainActivity.preguntesJoc[alea]);
+                //tots++;
             }
         }
 
@@ -165,7 +172,7 @@ public class PaginaPrincipal extends AppCompatActivity {
     }
 
     public void obre_pregunta(View v, int idx){
-        DadesPregunta pregunta = MainActivity.partida[idx];
+        DadesPregunta pregunta = MainActivity.preguntesPartida[idx];
         if (pregunta.getEstat()==0) {
             Intent i = new Intent(this, Pregunta.class);
             i.putExtra("index", String.valueOf(idx));
@@ -264,15 +271,15 @@ public class PaginaPrincipal extends AppCompatActivity {
     }
 
     public void mostraContingut(View v){
-        //TODO: depuració
+        //TODO: depuració (s'activa clicant sobre p2tv1)
         f.mostraContingut("historial");
     }
 
     public void mostraVars(View v){
-        //TODO: depuració
+        //TODO: depuració (s'activa clicant sobre p2tv1)
         String s = MainActivity.benContestades.toString();
-        s += "\n\n partida: [" ;
-        for(DadesPregunta p : MainActivity.partida)
+        s += "\n\n preguntesPartida: [" ;
+        for(DadesPregunta p : MainActivity.preguntesPartida)
             if(p != null)
                 s += " " +String.valueOf(p.getId()-1);
         s +="]";

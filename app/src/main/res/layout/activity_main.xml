@@ -10,17 +10,19 @@
 
     <TextView
         android:id="@+id/p1tv1"
-        android:layout_width="0dp"
-        android:layout_height="77dp"
+        android:layout_width="369dp"
+        android:layout_height="76dp"
         android:text="Hola,\nIntroduïx el teu nom i edat i comença el concurs."
         tools:textSize="18sp"
         android:layout_marginStart="53dp"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="26dp"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="53dp" />
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/p1et1"
+        app:layout_constraintVertical_bias="0.138" />
 
     <EditText
         android:id="@+id/p1et1"
@@ -33,10 +35,11 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="216dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginBottom="96dp"
+        app:layout_constraintBottom_toTopOf="@+id/p1b1" />
 
     <Button
         android:id="@+id/p1b1"

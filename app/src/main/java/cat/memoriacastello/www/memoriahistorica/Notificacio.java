@@ -7,6 +7,24 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+    /*
+        Esta classe i el seu respectiu xml són per a mostrar missatges
+        llargs que necessiten un temps considerable per a llegir-se. En
+        principi està pensada per a la depuració i mostrar els errors
+        que poden aparéixer mitjançant la captura d'errors.
+
+        Utilitzeu el codi següent:
+        ...
+            } catch (Exception e) {
+                StackTraceElement ste[] = e.getStackTrace();
+                String s = "";
+                for (StackTraceElement e : ste)
+                    s += String.format("\n\t\t%s", e);
+                f.enviaMissatge(s);
+            }
+        ...
+
+    */
 public class Notificacio extends AppCompatActivity {
     private TextView p8tv1;
 

@@ -66,16 +66,16 @@ public class Professor extends AppCompatActivity {
                 errMsg = "Per favor, introduïu la contrassenya facilitada al professorat.";
             } else if (!comparePasswords(clau)) {
                 errMsg = "La contrasenya és incorrecta.";
-            } else if (idpreg < 1 || idpreg > MainActivity.preguntes.length) {
-                errMsg = String.format("L'id de la pregunta ha de ser un nombre entre 1 i %d.", MainActivity.preguntes.length);
+            } else if (idpreg < 1 || idpreg > MainActivity.preguntesJoc.length) {
+                errMsg = String.format("L'id de la pregunta ha de ser un nombre entre 1 i %d.", MainActivity.preguntesJoc.length);
             }
             if (errMsg.length() > 0)
                 Toast.makeText(this, errMsg, Toast.LENGTH_LONG).show();
 
-            if (comparePasswords(clau) && idpreg > 0 && idpreg < MainActivity.preguntes.length) {
+            if (comparePasswords(clau) && idpreg > 0 && idpreg < MainActivity.preguntesJoc.length) {
                 p6tv1.setVisibility(View.VISIBLE);
                 p6tv2.setVisibility(View.VISIBLE);
-                DadesPregunta preg = MainActivity.preguntes[idpreg - 1];
+                DadesPregunta preg = MainActivity.preguntesJoc[idpreg - 1];
                 String resp;
                 p6tv1.setText(preg.getEnunciat());
                 switch (preg.getRespCorrecta()) {

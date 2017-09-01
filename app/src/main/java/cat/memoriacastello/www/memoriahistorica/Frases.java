@@ -9,6 +9,9 @@ import java.util.Random;
 
 /**
  * Created by coet on 18/08/2017.
+ *
+ * En esta classe obtenim els missatges que apareixen al llarg del
+ * desenvolupament del joc.
  */
 
 public class Frases {
@@ -17,7 +20,7 @@ public class Frases {
 
 
     private static List<String> benvingudes = Arrays.asList(
-            //Quan s'inicia el joc i no hi ha preguntes conetestades
+            //Quan s'inicia el joc i no hi ha preguntesJoc conetestades
             "Hola %s, comencem!",
             "Hola %s, juguem!",
             "Que comence el joc, %s!"
@@ -70,14 +73,14 @@ public class Frases {
 
 
     private static List<String> finalitzacions = Arrays.asList(
-            //Quan l'usuari ha contestat a totes les preguntes
+            //Quan l'usuari ha contestat a totes les preguntesJoc
             "Bé, sembla que ja ho tens tot, és hora de marxar ;)",
-            "Bé %s, ja has contestat a tot! Reinicia i contesta a noves preguntes!"
+            "Bé %s, ja has contestat a tot! Reinicia i contesta a noves preguntesJoc!"
     );
 
 
     private static List<String> continuacions = Arrays.asList(
-            //Quan l'usuari encara no ha respost a totes les preguntes.
+            //Quan l'usuari encara no ha respost a totes les preguntesJoc.
             "Ho estàs fent bé, %s, a vore si ho acabes!",
             "Segur que ho aconseguixes, endavant!",
             "Molt bé %s!, seguix així!"

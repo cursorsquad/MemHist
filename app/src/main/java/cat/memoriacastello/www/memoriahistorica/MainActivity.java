@@ -17,12 +17,12 @@ import java.util.regex.Pattern;
 public class MainActivity extends AppCompatActivity {
     //Atributs
     protected static String nomUsuari;
-      //Vector amb totes les preguntes.
+      //Vector amb totes les preguntesJoc.
     protected static final int MAX_PREGUNTES = 42;
-    protected static DadesPregunta preguntes[] = new DadesPregunta[MAX_PREGUNTES];
+    protected static DadesPregunta preguntesJoc[] = new DadesPregunta[MAX_PREGUNTES];
       //Vector amb només 20 preg. del joc en curs.
     protected static final int MAX_PREG_PER_PARTIDA = 20;
-    protected static DadesPregunta partida[] = new DadesPregunta[MAX_PREG_PER_PARTIDA];
+    protected static DadesPregunta preguntesPartida[] = new DadesPregunta[MAX_PREG_PER_PARTIDA];
     protected static long horaInici;
     protected static long horaFi;
     protected static int contestades;
@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void lligDades() {
         /*
-        TODO: fer que després de llegir les dades canvie l'ordre tant de les preguntes com
-        de les respostes. Estaria molt bé que n'hi haja més de 20 preguntes, jo en posaria
-        40, encara que cada partida només en mostraria 20. Quan es reiniciara el joc canviarien
-        les 20 preguntes. L'únic que sabria les preguntes seria el profe.
+        TODO: fer que després de llegir les dades canvie l'ordre tant de les preguntesJoc com
+        de les respostes. Estaria molt bé que n'hi haja més de 20 preguntesJoc, jo en posaria
+        40, encara que cada preguntesPartida només en mostraria 20. Quan es reiniciara el joc canviarien
+        les 20 preguntesJoc. L'únic que sabria les preguntesJoc seria el profe.
 
         TODO: Estaria bé que el profe tinguera un accés especial per a conéixer la resposta a la
         pregunta.
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 if (vector.length < 5 || vector.length > 6) {
                     //Hi ha hagut un error en la construcció de la pregunta
                     //falten o sobren tabulacions.
-                    preguntes[i++] = new DadesPregunta(
+                    preguntesJoc[i++] = new DadesPregunta(
                             i+1,
                             String.format("#ERROR DE LECTURA ([#%d] %d tabs)", i, vector.length),
                             "#resp1",
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                             i+1, enunciat, resp1, resp2, resp3, iRespCorr, imatge
                     );
                 }
-                preguntes[i++] = dp;
+                preguntesJoc[i++] = dp;
             }
         } catch (Exception e) {
             msg = "No s'ha pogut accedir al fitxer.";

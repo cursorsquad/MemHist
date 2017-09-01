@@ -31,7 +31,7 @@ public class Pregunta extends AppCompatActivity {
         p3rb2 = (RadioButton) findViewById(R.id.p3rb2);
         p3rb3 = (RadioButton) findViewById(R.id.p3rb3);
 
-        DadesPregunta pregunta = MainActivity.partida[index];
+        DadesPregunta pregunta = MainActivity.preguntesPartida[index];
 
         p3tv1.setText(String.format("[%02d] %s", pregunta.getId(), pregunta.getEnunciat()));
         p3rb1.setText(pregunta.getResposta1());
@@ -58,8 +58,8 @@ public class Pregunta extends AppCompatActivity {
             Frases.anima(this);
             MainActivity.contestades += 1;
         }
-        MainActivity.partida[index].setEstat(estat);
-        f.desaFitxer("historial", String.format("[id:%d\te:%d]", MainActivity.partida[index].getId()-1, estat));
+        MainActivity.preguntesPartida[index].setEstat(estat);
+        f.desaFitxer("historial", String.format("[id:%d\te:%d]", MainActivity.preguntesPartida[index].getId()-1, estat));
         finish();
     }
 }

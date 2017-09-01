@@ -12,6 +12,9 @@ import java.io.OutputStreamWriter;
 
 /**
  * Created by Coet on 30/08/2017.
+ *
+ * Esta classe ens permet accedir als fitxers de l'aplicació on emmagatzemem
+ * la informació aprop de les partides i jugadors.
  */
 
 public class Fitxer {
